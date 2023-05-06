@@ -1,5 +1,5 @@
 ---
-title: Hello World
+title: Hugo Theme Stack Starter踩坑记录
 description: Welcome to Hugo Theme Stack
 slug: hello-world-123
 date: 2022-03-06 00:00:00+0000
