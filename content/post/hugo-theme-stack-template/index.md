@@ -8,7 +8,6 @@ categories:
     - Hugo
 tags:
     - Hugo
-    - Hugo Theme Stack
 ---
 
 Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!
