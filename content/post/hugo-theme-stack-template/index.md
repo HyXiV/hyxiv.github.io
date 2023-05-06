@@ -2,7 +2,7 @@
 title: Hugo Theme Stack Starter踩坑记录
 description: Hugo Theme Stack Starter教程及常见问题
 slug: hugo-theme-stack-starter
-date: 2022-05-07 23:00:00+0000
+date: 2023-05-07 23:00:00+0000
 image: cover.jpg
 categories:
     - Hugo
