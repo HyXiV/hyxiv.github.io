@@ -1,6 +1,6 @@
 ---
-title: Example Category
-description: A description of this category
+title: Hugo
+description: Hugo踩坑记录
 image:
 
 # Badge style
