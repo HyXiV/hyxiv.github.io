@@ -1,13 +1,14 @@
 ---
 title: Hugo Theme Stack Starter踩坑记录
-description: Welcome to Hugo Theme Stack
-slug: hello-world-123
-date: 2022-03-06 00:00:00+0000
+description: Hugo Theme Stack Starter教程及常见问题
+slug: hugo-theme-stack-starter
+date: 2023-05-07 23:00:00+0000
 image: cover.jpg
 categories:
     - Hugo
 tags:
     - Hugo
+    - Hugo Theme Stack
 ---
 
 Welcome to Hugo theme Stack. This is your first post. Edit or delete it, then start writing!
