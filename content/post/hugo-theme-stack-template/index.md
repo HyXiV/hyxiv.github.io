@@ -23,9 +23,10 @@ tags:
 
 5. 检查 `config` 文件夹中的配置文件。将`config/_default/config.toml` 中的 `baseurl` 属性的值改成你自己的Github Pages地址
 
-6. 打开存储库的设置界面，切换到 `Actions` 部分，将最后的 `Workflow Permissions` 改为 `Read and write permissions` ，如果不修改，Github Actions自动部署时将会报错。
+6. 打开存储库的设置界面，切换到 `Actions` 部分，将最后的 `Workflow Permissions` 改为 `Read and write permissions` 并保存，如果不修改，Github Actions自动部署时将会报错。
+![Actions Settings](https://user-images.githubusercontent.com/132662822/236783632-c268813a-369a-4a1d-82db-94a77ce21221.png)
 
-7. 现在你可以编辑Blog了，Github Actions会自动部署Github Pages，把你的修改体现在 网页上。
+8. 现在你可以编辑Blog了，Github Actions会自动部署Github Pages，把你的修改体现在 网页上。
 
 二、常见问题
 
