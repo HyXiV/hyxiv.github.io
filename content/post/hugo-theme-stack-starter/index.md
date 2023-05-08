@@ -9,7 +9,7 @@ categories:
 tags:
     - Hugo
 ---
-一、Hugo Theme Stack Starter自动部署Github Pages教程
+**一、Hugo Theme Stack Starter自动部署Github Pages教程**
 
 1. 打开[Hugo Theme Stack Starter的Github链接](https://github.com/CaiJimmy/hugo-theme-stack-starter)
 
@@ -28,7 +28,7 @@ tags:
 
 8. 现在你可以编辑Blog了，Github Actions会自动部署Github Pages，把你的修改体现在 网页上。
 
-二、常见问题
+**二、常见问题**
 
 1. 文章的 `date` 属性如果晚于当前时间则此文章不会显示。
 
