@@ -2,7 +2,7 @@
 title: Hugo Theme Stack Starter踩坑记录
 description: Hugo Theme Stack Starter教程及常见问题
 slug: hugo-theme-stack-starter
-date: 2023-05-08 17:10:00+0000
+date: 2023-05-08 00:00:00+0000
 image: cover.jpg
 categories:
     - Hugo
@@ -30,7 +30,7 @@ tags:
 
 二、常见问题
 
-1. `content/page/archives/index.md` 中的 `date` 属性：文章时间早于此 `date` ，则此文章会显示在 `Home` 及 `Archives` 栏目中，时间晚于此 `date` ，文章不会显示在 `Home` 及 `Archives` 栏目中。
+1. 文章的 `date` 属性如果晚于当前时间则此文章不会显示。
 
 
 > Photo by [Pawel Czerwinski](https://unsplash.com/@pawel_czerwinski) on [Unsplash](https://unsplash.com/)
