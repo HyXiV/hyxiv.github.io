@@ -16,8 +16,7 @@ tags:
 
 **二、课后习题**
 
-1. 
-    输入
+1. 输入
     ````shell
     echo $SHELL
     ````
@@ -27,44 +26,45 @@ tags:
     ````
 
 2. 
+    输入
     ````shell
     cd /tmp
     mkdir missing
     ````
 
-3. 
+3. 输入
     ````shell
     man touch
     ````
 
-4. 
+4. 输入
     ````shell
     cd missing
     touch semester
     ````
 
-5. 
+5. 输入
     ````shell
     echo '#!/bin/sh' > semester
     echo curl --head --silent https://missing.csail.mit.edu >> semester
     ````
     第一行中有特殊符号存在`#`以及`!`存在，需将此行包含在`'`之内。
 
-6.
-    ````shell
+6. 输入
+    ````
     ./semester
     ````
     输出
-    ````shell
+    ````
     -bash: ./semester: Permission denied
     ````
 
     输入
-    ````shell
+    ````
     ls -l
     ````
     输出
-    ````shell
+    ````
     -rw-r--r--. 1 root root 61 May 16 05:16 semester
     ````
 
@@ -81,7 +81,7 @@ tags:
     chmod u+x semester
     ./semester
     ````
-    
+
 未完待续
 
 
