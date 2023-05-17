@@ -81,9 +81,25 @@ tags:
     chmod u+x semester
     ./semester
     ````
+    查阅[shebang](https://zh.wikipedia.org/wiki/Shebang)可知，系统根据`semester`首行的`#!/bin/sh`得知此文件使用`sh`执行。
 
-未完待续
+9.
+    输入
+    ````shell
+    ./semester | grep Last-Modified > ~/last-modified.txt 
+    ````
 
+    可以输入
+    ````shell
+    cat ~/last-modified.txt
+    ````
+    输出为
+    ````shell
+    Last-Modified: Sat, 06 May 2023 11:21:52 GMT
+    ````
 
+10. 
+    由于本人使用VPS实现此部分练习且无Linux主机，无法完成此练习。
+    
 
 > Photo by [Pawel Czerwinski](https://unsplash.com/@pawel_czerwinski) on [Unsplash](https://unsplash.com/)
