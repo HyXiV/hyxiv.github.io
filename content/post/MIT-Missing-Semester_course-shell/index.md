@@ -16,7 +16,8 @@ tags:
 
 **二、课后习题**
 
-1. 输入
+1. 
+    输入
     ````shell
     echo $SHELL
     ````
@@ -80,6 +81,7 @@ tags:
     chmod u+x semester
     ./semester
     ````
+    
 未完待续
 
 
