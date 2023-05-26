@@ -39,7 +39,24 @@ tags:
 
     打开其中一个链接，如111.111.111.111:3000  
     会出现以下界面：  
+    ![config1](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/cb8667bd-8f9b-46c1-9101-c6398b2785d1)  
     点击开始配置，进入下一步  
+    ![config2](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/4347bab9-a056-40af-956e-d38d31c55110)  
+    从路由器将此主机设置为静态IP后点击下一步  
+    ![config3](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/c71f0bf6-3c25-483e-ad2a-457c4c0b4950)  
+    设置用户名与密码后点击下一步  
+    ![config4](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/c82c3b32-2933-47c0-b6b0-042cc911df0f)  
+    在路由器中将此主机设置为DNS主机，完成后点击下一步  
+    ![config5](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/aade529e-bac5-4924-994d-12c89be91ad2)  
+    点击打开仪表盘，完成首次配置  
+    
+    **c. 配置DNS重写**
+    
+    DNS重写，即将指定域名定向至指定地址，使用此功能即可将域名指向本地IP，实现通过域名访问本地服务。
+    
+    
+
+
     
 
 
@@ -47,90 +64,7 @@ tags:
 
 **二、使用域名代替IP地址访问本地服务**
 
-1. 输入
-    ````shell
-    echo $SHELL
-    ````
-    输出
-    ````
-    /bin/bash
-    ````
 
-2. 
-    输入
-    ````shell
-    cd /tmp
-    mkdir missing
-    ````
-
-3. 输入
-    ````shell
-    man touch
-    ````
-
-4. 输入
-    ````shell
-    cd missing
-    touch semester
-    ````
-
-5. 输入
-    ````shell
-    echo '#!/bin/sh' > semester
-    echo curl --head --silent https://missing.csail.mit.edu >> semester
-    ````
-    第一行中有特殊符号存在`#`以及`!`存在，需将此行包含在`'`之内。
-
-6. 输入
-    ````
-    ./semester
-    ````
-    输出
-    ````
-    -bash: ./semester: Permission denied
-    ````
-
-    输入
-    ````
-    ls -l
-    ````
-    输出
-    ````
-    -rw-r--r--. 1 root root 61 May 16 05:16 semester
-    ````
-
-    由`-rw-r--r--`可知，所有者权限为`rw-`，即可读/可写/不可执行；用户组权限为`r--`，即可读/不可写/不可执行；其他所有人权限为`r--`，即可读/不可写/不可执行。所有用户均无执行权限，故无法执行。
-
-7. 
-    ````shell
-    man chmod
-    ````
-
-8. 
-    查阅chmod文档可知，使用以下命令为当前用户`u`添加`semester`文件的执行权限`x`并执行该文件
-    ````shell
-    chmod u+x semester
-    ./semester
-    ````
-    查阅[shebang](https://zh.wikipedia.org/wiki/Shebang)可知，系统根据`semester`首行的`#!/bin/sh`得知此文件使用`sh`执行。
-
-9.
-    输入
-    ````shell
-    ./semester | grep Last-Modified > ~/last-modified.txt 
-    ````
-
-    可以输入
-    ````shell
-    cat ~/last-modified.txt
-    ````
-    输出为
-    ````shell
-    Last-Modified: Sat, 06 May 2023 11:21:52 GMT
-    ````
-
-10. 
-    由于本人使用VPS实现此部分练习且无Linux主机，无法完成此练习。
     
 
 > Photo by [Pawel Czerwinski](https://unsplash.com/@pawel_czerwinski) on [Unsplash](https://unsplash.com/)
