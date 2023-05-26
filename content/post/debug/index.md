@@ -1,7 +1,7 @@
 ---
 title: 日常问题
 description: 全生涯问题记录
-slug: mit-missing-semester-course-shell
+slug: debug
 date: 2023-05-16 15:30:00+0800
 image: cover.jpg
 categories:
