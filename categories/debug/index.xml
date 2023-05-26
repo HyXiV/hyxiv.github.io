@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>debug on HyXiV</title><link>https://hyxiv.github.io/categories/debug/</link><description>Recent content in debug on HyXiV</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 16 May 2023 15:30:00 +0800</lastBuildDate><atom:link href="https://hyxiv.github.io/categories/debug/index.xml" rel="self" type="application/rss+xml"/><item><title>日常问题</title><link>https://hyxiv.github.io/p/debug/</link><pubDate>Tue, 16 May 2023 15:30:00 +0800</pubDate><guid>https://hyxiv.github.io/p/debug/</guid><description>&lt;img src="https://hyxiv.github.io/p/debug/cover.jpg" alt="Featured image of post 日常问题" />&lt;ol>
+&lt;li>
+&lt;p>执行&lt;code>apt-get update&lt;/code>时提示&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">N: Repository &lt;span class="s1">&amp;#39;http://mirrors.ustc.edu.cn/debian bullseye InRelease&amp;#39;&lt;/span> changed its &lt;span class="s1">&amp;#39;Version&amp;#39;&lt;/span> value from &lt;span class="s1">&amp;#39;11.5&amp;#39;&lt;/span> to &lt;span class="s1">&amp;#39;11.7&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解决方法：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">apt-get update --allow-releaseinfo-change
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>即可正常更新源&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

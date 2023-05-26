@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HyXiV</title><link>https://hyxiv.github.io/</link><description>Recent content on HyXiV</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 26 May 2023 12:30:00 +0800</lastBuildDate><atom:link href="https://hyxiv.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>本地局域网使用域名访问及启用HTTPS</title><link>https://hyxiv.github.io/p/local-domain-and-https/</link><pubDate>Fri, 26 May 2023 12:30:00 +0800</pubDate><guid>https://hyxiv.github.io/p/local-domain-and-https/</guid><description>&lt;img src="https://hyxiv.github.io/p/local-domain-and-https/cover.jpg" alt="Featured image of post 本地局域网使用域名访问及启用HTTPS" />&lt;h1 id="一使用域名代替ip地址访问本地服务">&lt;strong>一、使用域名代替IP地址访问本地服务&lt;/strong>&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>为了使客户端在访问域名时指向本地服务，需在本地搭建DNS服务器，这里我们使用ADguard Home作为本地网络的全局DNS服务器，这里我们在一台debian虚拟机上安装，具体过程如下：&lt;/p>
+&lt;p>&lt;strong>a.安装ADguard Home&lt;/strong>&lt;/p>
+&lt;p>运行&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh &lt;span class="p">|&lt;/span> sh -s -- -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出如下（为保护隐私IP地址已修改）&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">AdGuard Home is now available at the following addresses:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> go to http://127.0.0.1:3000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> go to http://&lt;span class="o">[&lt;/span>::1&lt;span class="o">]&lt;/span>:3000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> go to http://111.111.111.111:3000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> go to http://&lt;span class="o">[&lt;/span>fe80:fe80:fe80:fe80:fe80:fe80%eth0&lt;span class="o">]&lt;/span>:3000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> go to http://172.172.172.172:3000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> go to http://&lt;span class="o">[&lt;/span>2606:2606:2606:2606:2606:2606:2606:2606&lt;span class="o">]&lt;/span>:3000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">2023/05/25 21:33:02 &lt;span class="o">[&lt;/span>info&lt;span class="o">]&lt;/span> service: action install has been &lt;span class="k">done&lt;/span> successfully on linux-systemd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">AdGuard Home is now installed and running
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">you can control the service status with the following commands:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo /opt/AdGuardHome/AdGuardHome -s start&lt;span class="p">|&lt;/span>stop&lt;span class="p">|&lt;/span>restart&lt;span class="p">|&lt;/span>status&lt;span class="p">|&lt;/span>install&lt;span class="p">|&lt;/span>uninstall
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>则代表安装已经完成&lt;/p>
+&lt;p>&lt;strong>b. 配置ADguard Home&lt;/strong>&lt;/p>
+&lt;p>打开其中一个链接，如111.111.111.111:3000&lt;br>
+会出现以下界面：&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/cb8667bd-8f9b-46c1-9101-c6398b2785d1"
+loading="lazy"
+alt="config1"
+>&lt;br>
+点击开始配置，进入下一步&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/4347bab9-a056-40af-956e-d38d31c55110"
+loading="lazy"
+alt="config2"
+>&lt;br>
+从路由器将此主机设置为静态IP后点击下一步&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/c71f0bf6-3c25-483e-ad2a-457c4c0b4950"
+loading="lazy"
+alt="config3"
+>&lt;br>
+设置用户名与密码后点击下一步&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/c82c3b32-2933-47c0-b6b0-042cc911df0f"
+loading="lazy"
+alt="config4"
+>&lt;br>
+在路由器中将此主机设置为DNS主机，完成后点击下一步&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/aade529e-bac5-4924-994d-12c89be91ad2"
+loading="lazy"
+alt="config5"
+>&lt;br>
+点击打开仪表盘，完成首次配置&lt;/p>
+&lt;p>&lt;strong>c. 配置DNS重写&lt;/strong>&lt;/p>
+&lt;p>DNS重写，即将指定域名定向至指定地址，使用此功能即可将域名指向本地IP，实现通过域名访问本地服务。
+点击最上面的&lt;code>过滤器&lt;/code>-&amp;gt;&lt;code>DNS重写&lt;/code>，打开DNS重写界面&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/43d19fd7-9884-453a-9ad8-439b796e329d"
+loading="lazy"
+alt="dns_rewrite1"
+>&lt;br>
+点击添加DNS重写&lt;br>
+&lt;img src="https://github.com/HyXiV/hyxiv.github.io/assets/132662822/27989ceb-e81e-43b5-b197-9102da3d85b9"
+loading="lazy"
+alt="image"
+>&lt;br>
+在上面输入域名，在下面输入要指向的IP地址，点击保存后即完成设置，可以使用这个域名访问你的本地服务了~&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>二、使用域名代替IP地址访问本地服务&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>MIT-Missing-Semester:01-课程概览与shell</title><link>https://hyxiv.github.io/p/mit-missing-semester-course-shell/</link><pubDate>Tue, 16 May 2023 15:30:00 +0800</pubDate><guid>https://hyxiv.github.io/p/mit-missing-semester-course-shell/</guid><description>&lt;img src="https://hyxiv.github.io/p/mit-missing-semester-course-shell/cover.jpg" alt="Featured image of post MIT-Missing-Semester:01-课程概览与shell" />&lt;p>&lt;strong>一、01-课程概览与shell笔记&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a class="link" href="https://missing-semester-cn.github.io/2020/course-shell/" target="_blank" rel="noopener"
+>中文版课程网站&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>二、课后习题&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$SHELL&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /tmp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mkdir missing
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">man touch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> missing
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">touch semester
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;#!/bin/sh&amp;#39;&lt;/span> &amp;gt; semester
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> curl --head --silent https://missing.csail.mit.edu &amp;gt;&amp;gt; semester
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>第一行中有特殊符号存在&lt;code>#&lt;/code>以及&lt;code>!&lt;/code>存在，需将此行包含在&lt;code>'&lt;/code>之内。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">./semester
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">-bash: ./semester: Permission denied
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ls -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">-rw-r--r--. 1 root root 61 May 16 05:16 semester
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>由&lt;code>-rw-r--r--&lt;/code>可知，所有者权限为&lt;code>rw-&lt;/code>，即可读/可写/不可执行；用户组权限为&lt;code>r--&lt;/code>，即可读/不可写/不可执行；其他所有人权限为&lt;code>r--&lt;/code>，即可读/不可写/不可执行。所有用户均无执行权限，故无法执行。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">man chmod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>查阅chmod文档可知，使用以下命令为当前用户&lt;code>u&lt;/code>添加&lt;code>semester&lt;/code>文件的执行权限&lt;code>x&lt;/code>并执行该文件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">chmod u+x semester
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./semester
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>查阅&lt;a class="link" href="https://zh.wikipedia.org/wiki/Shebang" target="_blank" rel="noopener"
+>shebang&lt;/a>可知，系统根据&lt;code>semester&lt;/code>首行的&lt;code>#!/bin/sh&lt;/code>得知此文件使用&lt;code>sh&lt;/code>执行。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">./semester &lt;span class="p">|&lt;/span> grep Last-Modified &amp;gt; ~/last-modified.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>可以输入&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">cat ~/last-modified.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出为&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">Last-Modified: Sat, &lt;span class="m">06&lt;/span> May &lt;span class="m">2023&lt;/span> 11:21:52 GMT
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>由于本人使用VPS实现此部分练习且无Linux主机，无法完成此练习。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>日常问题</title><link>https://hyxiv.github.io/p/debug/</link><pubDate>Tue, 16 May 2023 15:30:00 +0800</pubDate><guid>https://hyxiv.github.io/p/debug/</guid><description>&lt;img src="https://hyxiv.github.io/p/debug/cover.jpg" alt="Featured image of post 日常问题" />&lt;ol>
+&lt;li>
+&lt;p>执行&lt;code>apt-get update&lt;/code>时提示&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">N: Repository &lt;span class="s1">&amp;#39;http://mirrors.ustc.edu.cn/debian bullseye InRelease&amp;#39;&lt;/span> changed its &lt;span class="s1">&amp;#39;Version&amp;#39;&lt;/span> value from &lt;span class="s1">&amp;#39;11.5&amp;#39;&lt;/span> to &lt;span class="s1">&amp;#39;11.7&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>解决方法：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">apt-get update --allow-releaseinfo-change
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>即可正常更新源&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Hugo Theme Stack Starter踩坑记录</title><link>https://hyxiv.github.io/p/hugo-theme-stack-starter/</link><pubDate>Mon, 08 May 2023 17:30:00 +0800</pubDate><guid>https://hyxiv.github.io/p/hugo-theme-stack-starter/</guid><description>&lt;img src="https://hyxiv.github.io/p/hugo-theme-stack-starter/cover.jpg" alt="Featured image of post Hugo Theme Stack Starter踩坑记录" />&lt;p>&lt;strong>一、Hugo Theme Stack Starter自动部署Github Pages教程&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>打开&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+>Hugo Theme Stack Starter的Github链接&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击右上角的 &lt;em>Use this template&lt;/em>，创建自己的存储库（需要为Github Pages才可以使用自动部署）
+&lt;img src="https://user-images.githubusercontent.com/5889006/156916624-20b2a784-f3a9-4718-aa5f-ce2a436b241f.png"
+loading="lazy"
+alt="Step 2"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>建好存储库之后，从右上角新建Github Codespaces.
+&lt;img src="https://user-images.githubusercontent.com/5889006/156916672-43b7b6e9-4ffb-4704-b4ba-d5ca40ffcae7.png"
+loading="lazy"
+alt="Create codespace"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开CodeSpaces，在终端中运行 &lt;code>hugo server&lt;/code> 即可预览网页&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>检查 &lt;code>config&lt;/code> 文件夹中的配置文件。将&lt;code>config/_default/config.toml&lt;/code> 中的 &lt;code>baseurl&lt;/code> 属性的值改成你自己的Github Pages地址&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开存储库的设置界面，切换到 &lt;code>Actions&lt;/code> 部分，将最后的 &lt;code>Workflow Permissions&lt;/code> 改为 &lt;code>Read and write permissions&lt;/code> 并保存，如果不修改，Github Actions自动部署时将会报错。
+&lt;img src="https://user-images.githubusercontent.com/132662822/236783632-c268813a-369a-4a1d-82db-94a77ce21221.png"
+loading="lazy"
+alt="Actions Settings"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>现在你可以编辑Blog了，Github Actions会自动部署Github Pages，把你的修改体现在 网页上。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>二、常见问题&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>文章的 &lt;code>date&lt;/code> 属性如果晚于当前时间则此文章不会显示。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Archives</title><link>https://hyxiv.github.io/archives/</link><pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate><guid>https://hyxiv.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://hyxiv.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hyxiv.github.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">links&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub is the world&amp;#39;s largest software development platform.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.com&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://www.typescriptlang.org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ts-logo-128.jpg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>image&lt;/code> field accepts both local and external images.&lt;/p></description></item><item><title>Search</title><link>https://hyxiv.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://hyxiv.github.io/search/</guid><description/></item></channel></rss>

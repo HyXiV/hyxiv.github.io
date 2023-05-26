@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on HyXiV</title><link>https://hyxiv.github.io/tags/hugo/</link><description>Recent content in Hugo on HyXiV</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 08 May 2023 17:30:00 +0800</lastBuildDate><atom:link href="https://hyxiv.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo Theme Stack Starter踩坑记录</title><link>https://hyxiv.github.io/p/hugo-theme-stack-starter/</link><pubDate>Mon, 08 May 2023 17:30:00 +0800</pubDate><guid>https://hyxiv.github.io/p/hugo-theme-stack-starter/</guid><description>&lt;img src="https://hyxiv.github.io/p/hugo-theme-stack-starter/cover.jpg" alt="Featured image of post Hugo Theme Stack Starter踩坑记录" />&lt;p>&lt;strong>一、Hugo Theme Stack Starter自动部署Github Pages教程&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>打开&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack-starter" target="_blank" rel="noopener"
+>Hugo Theme Stack Starter的Github链接&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>点击右上角的 &lt;em>Use this template&lt;/em>，创建自己的存储库（需要为Github Pages才可以使用自动部署）
+&lt;img src="https://user-images.githubusercontent.com/5889006/156916624-20b2a784-f3a9-4718-aa5f-ce2a436b241f.png"
+loading="lazy"
+alt="Step 2"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>建好存储库之后，从右上角新建Github Codespaces.
+&lt;img src="https://user-images.githubusercontent.com/5889006/156916672-43b7b6e9-4ffb-4704-b4ba-d5ca40ffcae7.png"
+loading="lazy"
+alt="Create codespace"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开CodeSpaces，在终端中运行 &lt;code>hugo server&lt;/code> 即可预览网页&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>检查 &lt;code>config&lt;/code> 文件夹中的配置文件。将&lt;code>config/_default/config.toml&lt;/code> 中的 &lt;code>baseurl&lt;/code> 属性的值改成你自己的Github Pages地址&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开存储库的设置界面，切换到 &lt;code>Actions&lt;/code> 部分，将最后的 &lt;code>Workflow Permissions&lt;/code> 改为 &lt;code>Read and write permissions&lt;/code> 并保存，如果不修改，Github Actions自动部署时将会报错。
+&lt;img src="https://user-images.githubusercontent.com/132662822/236783632-c268813a-369a-4a1d-82db-94a77ce21221.png"
+loading="lazy"
+alt="Actions Settings"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>现在你可以编辑Blog了，Github Actions会自动部署Github Pages，把你的修改体现在 网页上。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>二、常见问题&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>文章的 &lt;code>date&lt;/code> 属性如果晚于当前时间则此文章不会显示。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@pawel_czerwinski" target="_blank" rel="noopener"
+>Pawel Czerwinski&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote></description></item></channel></rss>
