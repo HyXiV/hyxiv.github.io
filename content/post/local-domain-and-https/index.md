@@ -53,6 +53,11 @@ tags:
     **c. 配置DNS重写**
     
     DNS重写，即将指定域名定向至指定地址，使用此功能即可将域名指向本地IP，实现通过域名访问本地服务。
+    点击最上面的`过滤器`->`DNS重写`，打开DNS重写界面  
+    ![dns_rewrite1](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/43d19fd7-9884-453a-9ad8-439b796e329d)
+    点击添加DNS重写  
+    ![image](https://github.com/HyXiV/hyxiv.github.io/assets/132662822/27989ceb-e81e-43b5-b197-9102da3d85b9)
+    在上面输入域名，在下面输入要指向的IP地址，点击保存后即完成设置，可以使用这个域名访问你的本地服务了~
     
     
 
