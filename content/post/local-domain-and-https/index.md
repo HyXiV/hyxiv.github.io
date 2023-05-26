@@ -2,7 +2,7 @@
 title: 本地局域网使用域名访问及启用HTTPS
 description: 在局域网中使用域名代替IP地址访问及使用安全HTTPS的方法
 slug: local-domain-and-https
-date: 2023-05-26 15:30:00+0800
+date: 2023-05-26 12:30:00+0800
 image: cover.jpg
 categories:
     - MIT-Missing-Semester
